@@ -7,31 +7,41 @@ class Piece {
 
 
   boolean isHolding;
+  
   Piece (float xx, float yy, boolean isCirclee) {
     x =xx;
     y = yy;
-    r = 34;
+    r = 33;
     isCircle = isCirclee;
     isHolding = false;
   }
 
 
   void draw () {
-    if (isCircle) {
+    if (isCircle) {//Player 1 turn => draw Circle
       fill(255, 255, 0);
 
       if (isHolding) { //If piece is being held, draw circle at mouse's position
 
-        circle(mouseX, mouseY, r*2);
+        circle(x, y, r*2);
+
+        update();
+
+        println("Player 1 - holding");
       } else {
+
+
         circle (x, y, r*2);
       }
-    } else {
+    } else { //Player 2 turn => draw X
 
 
       if (isHolding) { 
-        line (mouseX - 25, mouseY - 25, mouseX + 25, mouseY + 25);
-        line (mouseX + 25, mouseY - 25, mouseX - 25, mouseY + 25);
+        line (x - 25, y - 25, x + 25, y + 25);
+        line (x + 25, y - 25, x - 25, y + 25);
+
+        println("Player 2 - holding");
+        update();
       } else {
         line (x - 25, y - 25, x + 25, y + 25);
         line (x + 25, y - 25, x - 25, y + 25);
@@ -46,5 +56,11 @@ class Piece {
       isHolding = true;
     }
     return true;
+  }
+
+
+  void update() {
+    x = mouseX;
+    y = mouseY;
   }
 }
